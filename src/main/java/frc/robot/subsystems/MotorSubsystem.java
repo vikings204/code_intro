@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.*;
+import edu.wpi.first.wpilibj.XboxController;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -11,9 +12,11 @@ public class MotorSubsystem extends SubsystemBase {
     private RelativeEncoder encoder = motor.getEncoder(); // Grab the attached encoder
 
     public void setMotor(double joyY) {
+         joyY /=2;
         SmartDashboard.putNumber("Encoder", encoder.getVelocity());
         SmartDashboard.putNumber("JoyPos", joyY);
         System.out.println("command: " + joyY + " drive: " + motor.getAppliedOutput() + " encvel:" + encoder.getVelocity() );
         motor.set(joyY);
+       
     }
 }
