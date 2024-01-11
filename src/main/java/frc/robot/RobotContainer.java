@@ -15,7 +15,8 @@ public class RobotContainer {
 
     public Command getTeleopCommand() {
         return new RunCommand(() -> {
-            MotorSubsystem.setMotor(joystick.getY());
-        }, MotorSubsystem);
+            joystick.getRawButton(0);
+            MotorSubsystem.triggerMotor(joystick.getTrigger());
+            }, MotorSubsystem);
     }
 }
