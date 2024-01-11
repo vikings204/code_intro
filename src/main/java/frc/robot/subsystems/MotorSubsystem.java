@@ -11,6 +11,7 @@ public class MotorSubsystem extends SubsystemBase {
     private RelativeEncoder encoder = motor.getEncoder(); // Grab the attached encoder
 
     public void setMotor(double joyY) {
+        joyY = joyY*0.25;
         SmartDashboard.putNumber("Encoder", encoder.getVelocity());
         SmartDashboard.putNumber("JoyPos", joyY);
         System.out.println("command: " + joyY + " drive: " + motor.getAppliedOutput() + " encvel:" + encoder.getVelocity() );
