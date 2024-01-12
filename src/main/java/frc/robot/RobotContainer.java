@@ -7,15 +7,21 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import frc.robot.subsystems.MotorSubsystem;
+import frc.robot.subsystems.HookSubsystem;
 
 public class RobotContainer {
-    private final MotorSubsystem MotorSubsystem = new MotorSubsystem();
+    private final HookSubsystem HookSubsystem = new HookSubsystem();
     Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
 
     public Command getTeleopCommand() {
         return new RunCommand(() -> {
-            MotorSubsystem.setMotor(joystick.getY());
-        }, MotorSubsystem);
+            double i = joystick.getY();
+            System.out.println(i);
+            if(i>0.1) {
+                HookSubsystem.raiseMotor();
+            }   else if (i<-0.1) {
+                    HookSubsystem.downHook();
+            }
+        }, HookSubsystem);
     }
 }
