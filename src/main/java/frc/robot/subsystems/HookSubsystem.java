@@ -26,7 +26,7 @@ public class HookSubsystem extends SubsystemBase {
             i = hookEncoder.getPosition();
         }
         hookMotor.stopMotor();
-        hookController.
+    
     }
 
     public void downHook() {
@@ -40,5 +40,14 @@ public class HookSubsystem extends SubsystemBase {
             i = hookEncoder.getPosition();
         }
         hookMotor.stopMotor();
+    }
+    promoted void execute() {
+        SmartDashboard.putNumber("Shooter Angle", .getPosition());
+        SmartDashboard.putNumber("Hook Height", hookEncoder.getPosition());
+        SmartDashboard.putNumber("Speed", 0);
+        SmartDashboard.putNumber("Left Drive Encoder", 0);
+        SmartDashboard.putNumber("Right Drive Encoder", 0);
+        SmartDashboard.putNumber("Swerve Angle", 0);
+
     }
 }
