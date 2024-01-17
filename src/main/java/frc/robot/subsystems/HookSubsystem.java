@@ -16,38 +16,42 @@ public class HookSubsystem extends SubsystemBase {
     hookController.setD(0);
     hookController.setFF(0);
 
-    public void raiseMotor() {
+
+    public void raiseMotor() {   
+        private CANSparkMax hookRaising = new CANSparkMax(Constants.MAXIMUMHOOK_HEIGHT, MotorType.kBrushless); 
         System.out.println("Raising Hook");
         hookController.setReference(hookEncoder.getDegrees(), ControlType, kPosition);
         hookController.setReference(0, ControlType.kPosition);
-        hookMotor.set(0.5);
+        hookRaising.set(0.5);
         double i = hookEncoder.getPosition();
         while (i<5){
             i = hookEncoder.getPosition();
         }
-        hookMotor.stopMotor();
-    
+        hookRaising.stopMotor();
+
     }
 
     public void downHook() {
+        private CANSparkMax hookDepth = new CANSparkMax(Constants.MAXIMUMHOOK_DEPTH, MotorType.kBrushless); 
         hookController.setReference(hook.getDegrees(), ControlType,kPosition);
         hookController.setReference(angle, ControlType.kPosition);
         System.out.println("Down Hook");
-        hookMotor.set(-0.5);
+        hookDepth.set(-0.5);
         hookEncoder.setPosition(0);
         double i = hookEncoder.getPosition();
         while (i>-5){
             i = hookEncoder.getPosition();
         }
-        hookMotor.stopMotor();
+        hookDepth.stopMotor();
     }
-    promoted void execute() {
-        SmartDashboard.putNumber("Shooter Angle", .getPosition());
+    
+    protected void execute() {
+        //SmartDashboard.putNumber("Shooter Angle", .getPosition());
         SmartDashboard.putNumber("Hook Height", hookEncoder.getPosition());
-        SmartDashboard.putNumber("Speed", 0);
-        SmartDashboard.putNumber("Left Drive Encoder", 0);
-        SmartDashboard.putNumber("Right Drive Encoder", 0);
-        SmartDashboard.putNumber("Swerve Angle", 0);
-
+        SmartDashboard.putNumber("Hook Depth", hookEncoder.getPosition());        
+        //SmartDashboard.putNumber("Speed", );
+        //SmartDashboard.putNumber("Left Drive Encoder", 0);
+        //SmartDashboard.putNumber("Right Drive Encoder", 0);
+        //SmartDashboard.putNumber("Swerve Angle", 0);
     }
 }
