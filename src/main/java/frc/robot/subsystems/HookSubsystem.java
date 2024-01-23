@@ -9,15 +9,15 @@ import frc.robot.Constants;
 public class HookSubsystem extends SubsystemBase {
     private CANSparkMax hookMotor = new CANSparkMax(Constants.MOTOR_CAN_ID, MotorType.kBrushless); // Create the Spark Max object in the program and include the CAN id and the type of motor used with the controller
     private RelativeEncoder hookEncoder = hookMotor.getEncoder(); // Grab the attached encoder
-    private final SparkPIDController hookController;
+    private final SparkPIDController hookController; 
     hookController = hookMotor.getPIDController();
     hookController.setP(0);
     hookController.setI(0);
     hookController.setD(0);
     hookController.setFF(0);
 
-
-    public void raiseMotor() {   
+    //raises the hook motor
+    public void raiseMotor() {
         private CANSparkMax hookRaising = new CANSparkMax(Constants.MAXIMUMHOOK_HEIGHT, MotorType.kBrushless); 
         System.out.println("Raising Hook");
         hookController.setReference(hookEncoder.getDegrees(), ControlType, kPosition);
@@ -28,9 +28,9 @@ public class HookSubsystem extends SubsystemBase {
             i = hookEncoder.getPosition();
         }
         hookRaising.stopMotor();
-
     }
 
+    //lowers the hook motor
     public void downHook() {
         private CANSparkMax hookDepth = new CANSparkMax(Constants.MAXIMUMHOOK_DEPTH, MotorType.kBrushless); 
         hookController.setReference(hook.getDegrees(), ControlType,kPosition);
@@ -45,6 +45,7 @@ public class HookSubsystem extends SubsystemBase {
         hookDepth.stopMotor();
     }
     
+    //Shuffleboard
     protected void execute() {
         //SmartDashboard.putNumber("Shooter Angle", .getPosition());
         SmartDashboard.putNumber("Hook Height", hookEncoder.getPosition());

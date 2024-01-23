@@ -15,6 +15,7 @@ Read through to develop your understanding of how robotics code works.
  */
 
 public class Robot extends TimedRobot {
+    private Command autonomousCommand;
     private Command teleopCommand;
 
     private RobotContainer robotContainer;
@@ -23,7 +24,8 @@ public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>(); 
+  private final SendableChooser<Command> m_chooser = new SendableChooser<>(); 
+
 
   @Override
   public void robotInit() {
@@ -37,15 +39,6 @@ public class Robot extends TimedRobot {
   @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
-    }
-
-    @Override
-    public void teleopInit() {
-      teleopCommand = robotContainer.getTeleopCommand();
-      if (teleopCommand != null) {
-        teleopCommand.cancel();
-        teleopCommand.schedule();
-      }
     }
 
   @Override
@@ -67,4 +60,12 @@ public class Robot extends TimedRobot {
         break;
     }
   }
+
+  @Override
+  public void teleopInit() {
+    teleopCommand = robotContainer.getTeleopCommand();
+    if (autonomousCommand != null) {
+        autonomousCommand.cancel();
+      }
+    }
 }
