@@ -13,10 +13,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.math.geometry.Transform3d;
 
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-import org.photovision.vision.opencv.CVMat;
-import org.photovision.vision.pipe.CVPipe;
 
 
 /**
@@ -89,43 +85,5 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     SmartDashboard.putNumber("Counter", counter++);
-
-  }
-
-  // set up USB camera capture
-  CameraServer.startAutomaticCapture();
-  CvSink cvSink = CameraServer.getVideo();
-
-  // set up AprilTag detector
-  AprilTagDetector detector = new AprilTagDetector();
-  AprilTagDetector.Config config = new AprilTagDetector.Config();
-  // set config parameters, e.g. config.blah = 5;
-  detector.setConfig(config);
-  detector.addFamily("tag16h5");
-
-  // Set up Pose Estimator
-  AprilTagPoseEstimator.Config poseEstConfig = new AprilTagPoseEstimator.Config(...);
-  AprilTagPoseEstimator estimator = new AprilTagPoseEstimator(poseEstConfig);
-
-  Mat mat = new Mat();
-  Mat graymat = new Mat();
-
-  while (!Thread.interrupted()) {
-  // grab image from camera
-    long time = cvSink.getFrame(mat);
-    if (time == 0) {
-      continue;  // error getting image
-    }
-
-    // convert image to grayscale
-    Imgproc.cvtColor(mat, graymat, Imgproc.COLOR_BGR2GRAY);
-  
-    // run detection
-    for (AprilTagDetection detection : detector.detect(graymat)) {
-    // filter by property
-
-      // run pose estimator
-      Transform3d pose = poseEstimator.estimate(detection);
-    }
   }
 }

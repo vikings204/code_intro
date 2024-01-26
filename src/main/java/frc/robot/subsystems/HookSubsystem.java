@@ -2,6 +2,9 @@ package frc.robot.subsystems;
 import java.util.*;
 import com.revrobotics.*;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -46,13 +49,23 @@ public class HookSubsystem extends SubsystemBase {
     }
     
     //Shuffleboard
+    Shuffleboard.getTab("Hook Height");
+        addPersistent("Max Height", MAXIMUMHOOK_HEIGHT);
+    Shuffleboard.getTab("Hook Depth");
+        addPersistent("Max Depth", MAXIMUMHOOK_DEPTH);
+    Shuffleboard.getTab("Shooter Angle");
+    Shuffleboard.getTab("Speed");
+    Shuffleboard.getTab("Left Drive Encoder");
+    Shuffleboard.getTab("Right Drive Encoder");   
+    Shuffleboard.getTab("Swerve Angle");   
     protected void execute() {
-        //SmartDashboard.putNumber("Shooter Angle", .getPosition());
         SmartDashboard.putNumber("Hook Height", hookEncoder.getPosition());
-        SmartDashboard.putNumber("Hook Depth", hookEncoder.getPosition());        
+        SmartDashboard.putNumber("Hook Depth", hookEncoder.getPosition());
+        //SmartDashboard.putNumber("Shooter Angle", .getPosition());        
         //SmartDashboard.putNumber("Speed", );
         //SmartDashboard.putNumber("Left Drive Encoder", 0);
         //SmartDashboard.putNumber("Right Drive Encoder", 0);
         //SmartDashboard.putNumber("Swerve Angle", 0);
     }
+
 }
