@@ -49,22 +49,64 @@ public class HookSubsystem extends SubsystemBase {
     }
     
     //Shuffleboard
-    Shuffleboard.getTab("Hook Height");
-        addPersistent("Max Height", MAXIMUMHOOK_HEIGHT);
-    Shuffleboard.getTab("Hook Depth");
-        addPersistent("Max Depth", MAXIMUMHOOK_DEPTH);
-    Shuffleboard.getTab("Shooter Angle");
-    Shuffleboard.getTab("Speed");
-    Shuffleboard.getTab("Left Drive Encoder");
-    Shuffleboard.getTab("Right Drive Encoder");   
-    Shuffleboard.getTab("Swerve Angle");   
+    Shuffleboard.getTab("Hook Height")
+        .addPersistent("Max Height", MAXIMUMHOOK_HEIGHT)
+        .withWidget(BuiltInWidgets.kNumberSlider)
+        .withProperties(Map.of("min", 0, "max", 5))
+        .withSize(330,270)
+        .withPosition(500,0)  
+        .getEntry();
+    Shuffleboard.getTab("Hook Depth")
+        .addPersistent("Max Depth", MAXIMUMHOOK_DEPTH)
+        .withWidget(BuiltInWidgets.kNumberSlider)
+        .withProperties(Map.of("min", 0, "max", -5))
+        .withSize(330,270)
+        .withPosition(500,275)  
+        .getEntry();
+    Shuffleboard.getTab("Shooter Angle")
+        .addPersistent("Shooter Angle", SHOOTER_ANGLE)
+        .withSize(330,270)
+        .withPosition(500,0)  
+        .getEntry();
+    Shuffleboard.getTab("Speed")
+        .addPersistent("Speed", SPEED)
+        .withSize(330,270)
+        .withPosition(500,0)  
+        .getEntry();
+    Shuffleboard.getTab("Front Left Drive Encoder")
+        .addPersistent("Front Left Drive Encoder", FRONTLEFT_DRIVE_ENCODER)
+        .withSize(495,269)
+        .withPosition(0,0)  
+        .getEntry();
+    Shuffleboard.getTab("Front Right Drive Encoder")
+        .addPersistent("Front Right Drive Encoder", FRONTRIGHT_DRIVE_ENCODER)
+        .withSize(495,269)
+        .withPosition(0,270)  
+        .getEntry();
+    Shuffleboard.getTab("Back Left Drive Encoder")
+        .addPersistent("Back Left Drive Encoder", BACKLEFT_DRIVE_ENCODER)
+        .withSize(495,269)
+        .withPosition(0,540)  
+        .getEntry();
+    Shuffleboard.getTab("Right Drive Encoder")
+        .addPersistent("Back Right Drive Encoder", BACKRIGHT_DRIVE_ENCODER)
+        .withSize(495,269)
+        .withPosition(0,810)  
+        .getEntry(); 
+    Shuffleboard.getTab("Swerve Angle")
+        .addPersistent("Swerve Angle", SWERVE_ANGLE)
+        .withSize(330,270)
+        .withPosition(500,0)  
+        .getEntry();
     protected void execute() {
         SmartDashboard.putNumber("Hook Height", hookEncoder.getPosition());
         SmartDashboard.putNumber("Hook Depth", hookEncoder.getPosition());
         //SmartDashboard.putNumber("Shooter Angle", .getPosition());        
         //SmartDashboard.putNumber("Speed", );
-        //SmartDashboard.putNumber("Left Drive Encoder", 0);
-        //SmartDashboard.putNumber("Right Drive Encoder", 0);
+        //SmartDashboard.putNumber("Front Left Drive Encoder", 0);
+        //SmartDashboard.putNumber("Front Right Drive Encoder", 0);
+        //SmartDashboard.putNumber("Back Left Drive Encoder", 0);
+        //SmartDashboard.putNumber("Back Right Drive Encoder", 0);
         //SmartDashboard.putNumber("Swerve Angle", 0);
     }
 
