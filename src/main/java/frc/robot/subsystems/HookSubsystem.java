@@ -18,6 +18,7 @@ public class HookSubsystem extends SubsystemBase {
     hookController.setI(0);
     hookController.setD(0);
     hookController.setFF(0);
+    
 
     //raises the hook motor
     public void raiseMotor() {
@@ -65,13 +66,13 @@ public class HookSubsystem extends SubsystemBase {
         .getEntry();
     Shuffleboard.getTab("Shooter Angle")
         .addPersistent("Shooter Angle", SHOOTER_ANGLE)
-        .withSize(330,270)
-        .withPosition(500,0)  
+        .withSize(800,530)
+        .withPosition(850,0)  
         .getEntry();
     Shuffleboard.getTab("Speed")
         .addPersistent("Speed", SPEED)
-        .withSize(330,270)
-        .withPosition(500,0)  
+        .withSize(330,520)
+        .withPosition(500,550)  
         .getEntry();
     Shuffleboard.getTab("Front Left Drive Encoder")
         .addPersistent("Front Left Drive Encoder", FRONTLEFT_DRIVE_ENCODER)
@@ -95,8 +96,8 @@ public class HookSubsystem extends SubsystemBase {
         .getEntry(); 
     Shuffleboard.getTab("Swerve Angle")
         .addPersistent("Swerve Angle", SWERVE_ANGLE)
-        .withSize(330,270)
-        .withPosition(500,0)  
+        .withSize(800,530)
+        .withPosition(850,545)  
         .getEntry();
     protected void execute() {
         SmartDashboard.putNumber("Hook Height", hookEncoder.getPosition());
